@@ -1,4 +1,4 @@
-import { sets } from '../../content/sets'
+import { sets, type Set as DJSet } from '@/content/sets'  // <-- alias the type
 
 const dtf = new Intl.DateTimeFormat('en-US', {
   year: 'numeric',
@@ -15,7 +15,7 @@ export default function SetsPage() {
     <section className="py-8">
       <h1 className="text-3xl font-mono">Sets</h1>
       <ul className="mt-6 space-y-4">
-        {sets.map((s, i) => (
+        {sets.map((s: DJSet, i: number) => (
           <li key={i} className="rounded-xl border border-white/15 p-4 hover:border-white/30 transition">
             <div className="flex items-center justify-between gap-4">
               <div>
