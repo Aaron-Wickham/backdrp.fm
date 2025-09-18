@@ -1,3 +1,5 @@
+import type { CSSProperties } from 'react'
+
 type Props = { url: string; title?: string }
 
 function toYouTubeEmbed(u: string) {
@@ -16,11 +18,11 @@ export default function Embed({ url, title = 'Embedded player' }: Props) {
   if (isYT) src = toYouTubeEmbed(url)
   if (isSC) src = `https://w.soundcloud.com/player/?url=${encodeURIComponent(url)}&color=%23ff0055`
 
-  // 16:9 for YouTube, a bit taller for SoundCloud
-  const ratio = isSC ? '16/10' : '16/9'
+  // Use typed aspect-ratio (string values must include spaces around the slash)
+  const aspect: CSSProperties['aspectRatio'] = isSC ? '16 / 10' : '16 / 9'
 
   return (
-    <div className="relative w-full" style={{ aspectRatio: ratio as any }}>
+    <div className="relative w-full" style={{ aspectRatio: aspect }}>
       <iframe
         className="absolute inset-0 h-full w-full rounded-xl border border-white/15"
         src={src}
